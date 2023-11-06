@@ -28,5 +28,33 @@ class MainActivity : AppCompatActivity() {
         btnPopBackStack = findViewById(R.id.buttonPopBackStack)
         btnDetach = findViewById(R.id.buttonDetach)
         btnAttach = findViewById(R.id.buttonAttach)
+
+        btnAddAndroid.setOnClickListener {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val androidFragment = AndroidFragment()
+            fragmentTransaction.add(R.id.linearlayoutContainer, androidFragment)
+            fragmentTransaction.commit()
+        }
+
+        btnAddIOS.setOnClickListener {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val iOS = IOSFragment()
+            fragmentTransaction.add(R.id.linearlayoutContainer, iOS)
+            fragmentTransaction.commit()
+        }
+
+        btnReplaceAndroid.setOnClickListener {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val androidFragment = AndroidFragment()
+            fragmentTransaction.replace(R.id.linearlayoutContainer, androidFragment)
+            fragmentTransaction.commit()
+        }
+
+        btnReplaceIOS.setOnClickListener {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val iOS = IOSFragment()
+            fragmentTransaction.replace(R.id.linearlayoutContainer, iOS)
+            fragmentTransaction.commit()
+        }
     }
 }
