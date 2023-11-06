@@ -4,8 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val androidFragment = AndroidFragment()
+        fragmentTransaction.add(R.id.linear_layout_container, androidFragment)
+        fragmentTransaction.commit()
     }
 }
