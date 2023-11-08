@@ -3,6 +3,7 @@ package com.example.fragment19052023
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.fragment.app.FragmentManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val androidFragment = AndroidFragment()
             fragmentTransaction.add(R.id.linearlayoutContainer, androidFragment, "tag-android")
+            fragmentTransaction.addToBackStack("tag-android")
             fragmentTransaction.commit()
         }
 
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val iOS = IOSFragment()
             fragmentTransaction.add(R.id.linearlayoutContainer, iOS, "tag-ios")
+            fragmentTransaction.addToBackStack("tag-ios")
             fragmentTransaction.commit()
         }
 
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val androidFragment = AndroidFragment()
             fragmentTransaction.replace(R.id.linearlayoutContainer, androidFragment, "tag-android")
+            fragmentTransaction.addToBackStack("tag-android")
             fragmentTransaction.commit()
         }
 
@@ -54,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val iOS = IOSFragment()
             fragmentTransaction.replace(R.id.linearlayoutContainer, iOS, "tag-ios")
+            fragmentTransaction.addToBackStack("tag-ios")
             fragmentTransaction.commit()
         }
 
@@ -73,6 +78,23 @@ class MainActivity : AppCompatActivity() {
                 fragmentTransaction.remove(iOSFragment)
                 fragmentTransaction.commit()
             }
+        }
+
+        btnPopBackStack.setOnClickListener {
+            supportFragmentManager.popBackStack(2, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        popToBackStack()
+    }
+
+    private fun popToBackStack() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            finishAffinity()
         }
     }
 }
