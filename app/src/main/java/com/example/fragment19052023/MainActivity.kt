@@ -83,6 +83,24 @@ class MainActivity : AppCompatActivity() {
         btnPopBackStack.setOnClickListener {
             supportFragmentManager.popBackStack(2, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
+
+        btnDetach.setOnClickListener {
+            val androidFragment = supportFragmentManager.findFragmentByTag("tag-android")
+            if (androidFragment != null) {
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.detach(androidFragment)
+                fragmentTransaction.commit()
+            }
+        }
+
+        btnAttach.setOnClickListener {
+            val androidFragment = supportFragmentManager.findFragmentByTag("tag-android")
+            if (androidFragment != null) {
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.attach(androidFragment)
+                fragmentTransaction.commit()
+            }
+        }
     }
 
     override fun onBackPressed() {
