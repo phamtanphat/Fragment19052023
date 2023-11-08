@@ -32,29 +32,47 @@ class MainActivity : AppCompatActivity() {
         btnAddAndroid.setOnClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val androidFragment = AndroidFragment()
-            fragmentTransaction.add(R.id.linearlayoutContainer, androidFragment)
+            fragmentTransaction.add(R.id.linearlayoutContainer, androidFragment, "tag-android")
             fragmentTransaction.commit()
         }
 
         btnAddIOS.setOnClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val iOS = IOSFragment()
-            fragmentTransaction.add(R.id.linearlayoutContainer, iOS)
+            fragmentTransaction.add(R.id.linearlayoutContainer, iOS, "tag-ios")
             fragmentTransaction.commit()
         }
 
         btnReplaceAndroid.setOnClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val androidFragment = AndroidFragment()
-            fragmentTransaction.replace(R.id.linearlayoutContainer, androidFragment)
+            fragmentTransaction.replace(R.id.linearlayoutContainer, androidFragment, "tag-android")
             fragmentTransaction.commit()
         }
 
         btnReplaceIOS.setOnClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val iOS = IOSFragment()
-            fragmentTransaction.replace(R.id.linearlayoutContainer, iOS)
+            fragmentTransaction.replace(R.id.linearlayoutContainer, iOS, "tag-ios")
             fragmentTransaction.commit()
+        }
+
+        btnRemoveAndroid.setOnClickListener {
+            val androidFragment = supportFragmentManager.findFragmentByTag("tag-android")
+            if (androidFragment != null) {
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.remove(androidFragment)
+                fragmentTransaction.commit()
+            }
+        }
+
+        btnRemoveIOS.setOnClickListener {
+            val iOSFragment = supportFragmentManager.findFragmentByTag("tag-ios")
+            if (iOSFragment != null) {
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.remove(iOSFragment)
+                fragmentTransaction.commit()
+            }
         }
     }
 }
